@@ -18,7 +18,6 @@ struct ContentView : View {
 struct ARViewContainer: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
-        
         let arView = MinesweeperARView(frame: .zero)
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = .horizontal
@@ -28,7 +27,6 @@ struct ARViewContainer: UIViewRepresentable {
         arView.setupGestures()
         arView.session.delegate = arView
         return arView
-        
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {}
