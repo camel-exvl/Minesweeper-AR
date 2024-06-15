@@ -9,6 +9,11 @@ import RealityKit
 import ARKit
 import Combine
 
+enum GameStatus {
+    case playing
+    case win
+    case lose
+}
 
 struct GameSetting {
     var rows: Int = 9
@@ -26,11 +31,15 @@ struct TileData {
 class MinesweeperARView: ARView, ARSessionDelegate {
     let coachingOverlay = ARCoachingOverlayView()
     let gameSetting = GameSetting()
+    var gameStatus: GameStatus = .playing
+    var revealedTiles: Int = 0
+    var allTileNum: Int = 0
     var tiles: [[TileData]] = []
     
     var waitForAnchor: Cancellable?
     
     func initGame() {
+        allTileNum = gameSetting.rows * gameSetting.columns - gameSetting.mines
         tiles = Array(repeating: Array(repeating: TileData(), count: gameSetting.columns), count: gameSetting.rows)
         for _ in 0..<gameSetting.mines {
             var row = Int.random(in: 0..<gameSetting.rows)
@@ -52,6 +61,7 @@ class MinesweeperARView: ARView, ARSessionDelegate {
     }
     
     func showGrid() {
+        self.scene.anchors.removeAll()
         let grid = Grid(data: tiles)
         grid.minimumBounds = [0.5, 0.5]
         
@@ -64,5 +74,10 @@ class MinesweeperARView: ARView, ARSessionDelegate {
             }
         }
         self.scene.anchors.append(grid)
+    }
+    
+    func finishGame() {
+        gameStatus = revealedTiles == allTileNum ? .win : .lose
+        (self.scene.anchors[0] as! Grid).finish(win: gameStatus == .win)
     }
 }

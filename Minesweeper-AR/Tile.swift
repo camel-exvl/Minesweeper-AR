@@ -17,10 +17,13 @@ fileprivate extension UIColor {
 class Tile: Entity, HasModel, HasCollision {
     let boxSize: SIMD3<Float> = [1, 0.2, 1]
     let pos: SIMD2<Int>
+    var finished: Bool
+    var win: Bool = false
     var tile: TileData
     
-    init(pos: SIMD2<Int>, tile: TileData) {
+    init(pos: SIMD2<Int>, tile: TileData, finished: Bool) {
         self.pos = pos
+        self.finished = finished
         self.tile = tile
         super.init()
         render()
@@ -30,21 +33,19 @@ class Tile: Entity, HasModel, HasCollision {
         self.children.removeAll()
         
         let grayMaterial = UIColor.gray.toMaterial()
-        if tile.isRevealed {
-            if tile.isMine {
-                let mine = try! TextureResource.load(named: "mine_red.png")
-                renderTopFace(texture: mine)
-            } else {
-                if tile.minesAround == 0 {
-                    // TODO:
-                    return
-                }
-                let number = try! TextureResource.load(named: "\(tile.minesAround).png")
-                renderTopFace(texture: number)
-            }
-        } else if tile.isFlagged {
+        
+        if tile.isFlagged || (finished && win && tile.isMine) {
             let flag = try! TextureResource.load(named: "flag.png")
             renderTopFace(texture: flag)
+        } else if tile.isMine && (tile.isRevealed || finished) {
+            let mine = try! TextureResource.load(named: tile.isRevealed ? "mine_red.png" : "mine.png")
+            renderTopFace(texture: mine)
+        } else if !tile.isMine && tile.isRevealed {
+            if tile.minesAround == 0 {
+                return
+            }
+            let number = try! TextureResource.load(named: "\(tile.minesAround).png")
+            renderTopFace(texture: number)
         }
         
         let boxMesh = MeshResource.generateBox(size: boxSize)
@@ -70,19 +71,24 @@ class Tile: Entity, HasModel, HasCollision {
         self.addChild(topFaceEntity)
     }
     
-    func reveal() {
-        if tile.isFlagged {
-            return
-        }
+    func reveal() -> Int {
         tile.isRevealed = true
         render()
+        var cnt = 1
         if tile.minesAround == 0 {
-            (self.parent as! Grid).revealNeighbors(of: self)
+            cnt += (self.parent as! Grid).revealNeighbors(of: self)
         }
+        return cnt;
     }
     
     func longPress() {
         self.tile.isFlagged.toggle()
+        render()
+    }
+    
+    func finish(win: Bool) {
+        self.finished = true
+        self.win = win
         render()
     }
     
