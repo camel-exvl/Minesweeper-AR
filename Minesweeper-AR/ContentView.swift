@@ -25,6 +25,7 @@ struct ARViewContainer: UIViewRepresentable {
         arView.session.run(config, options: [])
         
         arView.addCoaching()
+        arView.setupGestures()
         arView.session.delegate = arView
         return arView
         
