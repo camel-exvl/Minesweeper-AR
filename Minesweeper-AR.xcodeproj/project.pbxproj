@@ -126,7 +126,7 @@
 		D313FE212C16F0140045C5F4 /* Minesweeper-AR */ = {
 			isa = PBXGroup;
 			children = (
-				D3FBD1672C1D804E00B4B8EF /* image */,
+				D3FBD1672C1D804E00B4B8EF /* Image */,
 				D313FE222C16F0140045C5F4 /* AppDelegate.swift */,
 				D313FE242C16F0140045C5F4 /* ContentView.swift */,
 				D313FE262C16F0150045C5F4 /* Assets.xcassets */,
@@ -165,7 +165,7 @@
 			path = "Minesweeper-ARUITests";
 			sourceTree = "<group>";
 		};
-		D3FBD1672C1D804E00B4B8EF /* image */ = {
+		D3FBD1672C1D804E00B4B8EF /* Image */ = {
 			isa = PBXGroup;
 			children = (
 				D3FBD1712C1D807500B4B8EF /* 1.png */,
@@ -180,7 +180,7 @@
 				D3FBD1732C1D807500B4B8EF /* mine.png */,
 				D3FBD17C2C1D807B00B4B8EF /* mine_red.png */,
 			);
-			path = image;
+			path = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
