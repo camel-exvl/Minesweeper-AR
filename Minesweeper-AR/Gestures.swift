@@ -18,31 +18,15 @@ extension MinesweeperARView {
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         guard let touchInView = sender?.location(in: self) else { return }
         guard let tile = self.entity(at: touchInView) as? Tile else { return }
-        if gameStatus != .playing && gameStatus != .ready {
-            return
-        }
         
-        if tile.tile.isRevealed || tile.tile.isFlagged {
-            return
-        }
-        if gameStatus == .ready {
-            gameStatus = .playing
-            // ensure the first tap is not a mine
-            if tile.tile.isMine {
-                (tile.parent as! Grid).generateAnotherMine(pos: tile.pos)
-            }
-        }
-        revealedTiles += tile.reveal()
-        if tile.tile.isMine {
-            revealedTiles -= 1
-        }
-        if revealedTiles == allTileNum || tile.tile.isMine {
+        viewModel.handleTap(tile: tile)
+        if viewModel.gameStatus == .win || viewModel.gameStatus == .lose {
             self.finishGame()
         }
     }
     
     @objc func handleLongPress(_ sender: UILongPressGestureRecognizer? = nil) {
-        if sender?.state != .began || gameStatus != .playing {
+        if sender?.state != .began || viewModel.gameStatus != .playing {
             return
         }
         guard let touchInView = sender?.location(in: self) else { return }

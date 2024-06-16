@@ -10,15 +10,22 @@ import RealityKit
 import ARKit
 
 struct ContentView : View {
+    let viewModel = ViewModel()
+    
     var body: some View {
-        ARViewContainer().edgesIgnoringSafeArea(.all)
+        ARViewContainer(viewModel: viewModel).edgesIgnoringSafeArea(.all)
     }
 }
 
 struct ARViewContainer: UIViewRepresentable {
+    let viewModel: ViewModel
+    
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+    }
     
     func makeUIView(context: Context) -> ARView {
-        let arView = MinesweeperARView(frame: .zero)
+        let arView = MinesweeperARView(viewModel: viewModel, frame: .zero)
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = .horizontal
         arView.session.run(config, options: [])

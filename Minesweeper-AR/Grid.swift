@@ -8,6 +8,7 @@
 import RealityKit
 
 class Grid: Entity, HasModel, HasAnchoring {
+    let viewModel: ViewModel
     let data: [[TileData]]
     // set bounds and scale
     var minimumBounds: SIMD2<Float>? = nil {
@@ -33,8 +34,9 @@ class Grid: Entity, HasModel, HasAnchoring {
         return self.children[(x * data[0].count) + y] as! Tile
     }
     
-    init(data: [[TileData]]) {
-        self.data = data
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+        self.data = viewModel.tiles
         super.init()
         for i in 0..<data.count {
             for j in 0..<data[i].count {

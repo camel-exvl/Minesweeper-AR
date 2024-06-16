@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D312338D2C1ECB6900DC9081 /* mine_error.png in Resources */ = {isa = PBXBuildFile; fileRef = D312338C2C1ECB6900DC9081 /* mine_error.png */; };
+		D31233912C1EEF4F00DC9081 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D31233902C1EEF4F00DC9081 /* ViewModel.swift */; };
 		D313FE232C16F0140045C5F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313FE222C16F0140045C5F4 /* AppDelegate.swift */; };
 		D313FE252C16F0140045C5F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313FE242C16F0140045C5F4 /* ContentView.swift */; };
 		D313FE272C16F0150045C5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D313FE262C16F0150045C5F4 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 		D3B354FA2C1C0F3D00EEF722 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B354F92C1C0F3D00EEF722 /* Grid.swift */; };
 		D3B354FC2C1C15A200EEF722 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B354FB2C1C15A200EEF722 /* Tile.swift */; };
 		D3BEA1E62C1C388E007C518D /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BEA1E52C1C388E007C518D /* Gestures.swift */; };
+		D3D4F88A2C1EEFFF003BA5B5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D4F8892C1EEFFF003BA5B5 /* Model.swift */; };
 		D3FBD16C2C1D806500B4B8EF /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FBD1682C1D806500B4B8EF /* 2.png */; };
 		D3FBD16D2C1D806500B4B8EF /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FBD1692C1D806500B4B8EF /* 3.png */; };
 		D3FBD16E2C1D806500B4B8EF /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = D3FBD16A2C1D806500B4B8EF /* 8.png */; };
@@ -52,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		D312338C2C1ECB6900DC9081 /* mine_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mine_error.png; sourceTree = "<group>"; };
+		D31233902C1EEF4F00DC9081 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D313FE1F2C16F0140045C5F4 /* Minesweeper-AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper-AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D313FE222C16F0140045C5F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D313FE242C16F0140045C5F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 		D3B354F92C1C0F3D00EEF722 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		D3B354FB2C1C15A200EEF722 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		D3BEA1E52C1C388E007C518D /* Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
+		D3D4F8892C1EEFFF003BA5B5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D3FBD1682C1D806500B4B8EF /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		D3FBD1692C1D806500B4B8EF /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		D3FBD16A2C1D806500B4B8EF /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				D3B354F92C1C0F3D00EEF722 /* Grid.swift */,
 				D3B354FB2C1C15A200EEF722 /* Tile.swift */,
 				D3BEA1E52C1C388E007C518D /* Gestures.swift */,
+				D31233902C1EEF4F00DC9081 /* ViewModel.swift */,
+				D3D4F8892C1EEFFF003BA5B5 /* Model.swift */,
 			);
 			path = "Minesweeper-AR";
 			sourceTree = "<group>";
@@ -328,12 +334,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D4F88A2C1EEFFF003BA5B5 /* Model.swift in Sources */,
 				D313FE252C16F0140045C5F4 /* ContentView.swift in Sources */,
 				D3B354F82C1C072100EEF722 /* Coaching.swift in Sources */,
 				D313FE7F2C17F61E0045C5F4 /* MinesweeperARView.swift in Sources */,
 				D3B354FC2C1C15A200EEF722 /* Tile.swift in Sources */,
 				D3B354FA2C1C0F3D00EEF722 /* Grid.swift in Sources */,
 				D3BEA1E62C1C388E007C518D /* Gestures.swift in Sources */,
+				D31233912C1EEF4F00DC9081 /* ViewModel.swift in Sources */,
 				D313FE232C16F0140045C5F4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

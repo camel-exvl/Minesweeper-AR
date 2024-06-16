@@ -75,7 +75,7 @@ class Tile: Entity, HasModel, HasCollision {
         tile.isRevealed = true
         render()
         var cnt = 1
-        if tile.minesAround == 0 {
+        if tile.minesAround == 0 && !tile.isMine {
             cnt += (self.parent as! Grid).revealNeighbors(of: self)
         }
         return cnt;
