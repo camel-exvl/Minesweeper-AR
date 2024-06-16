@@ -35,7 +35,7 @@ class Tile: Entity, HasModel, HasCollision {
         let grayMaterial = UIColor.gray.toMaterial()
         
         if tile.isFlagged || (finished && win && tile.isMine) {
-            let flag = try! TextureResource.load(named: "flag.png")
+            let flag = try! TextureResource.load(named: finished && !tile.isMine ? "mine_error.png" : "flag.png")
             renderTopFace(texture: flag)
         } else if tile.isMine && (tile.isRevealed || finished) {
             let mine = try! TextureResource.load(named: tile.isRevealed ? "mine_red.png" : "mine.png")

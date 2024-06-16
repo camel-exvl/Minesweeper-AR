@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D312338D2C1ECB6900DC9081 /* mine_error.png in Resources */ = {isa = PBXBuildFile; fileRef = D312338C2C1ECB6900DC9081 /* mine_error.png */; };
 		D313FE232C16F0140045C5F4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313FE222C16F0140045C5F4 /* AppDelegate.swift */; };
 		D313FE252C16F0140045C5F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313FE242C16F0140045C5F4 /* ContentView.swift */; };
 		D313FE272C16F0150045C5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D313FE262C16F0150045C5F4 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D312338C2C1ECB6900DC9081 /* mine_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mine_error.png; sourceTree = "<group>"; };
 		D313FE1F2C16F0140045C5F4 /* Minesweeper-AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Minesweeper-AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D313FE222C16F0140045C5F4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D313FE242C16F0140045C5F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				D3FBD1702C1D807500B4B8EF /* flag.png */,
 				D3FBD1732C1D807500B4B8EF /* mine.png */,
 				D3FBD17C2C1D807B00B4B8EF /* mine_red.png */,
+				D312338C2C1ECB6900DC9081 /* mine_error.png */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				D3FBD16F2C1D806500B4B8EF /* 6.png in Resources */,
 				D3FBD17B2C1D807500B4B8EF /* 7.png in Resources */,
 				D3FBD1772C1D807500B4B8EF /* 1.png in Resources */,
+				D312338D2C1ECB6900DC9081 /* mine_error.png in Resources */,
 				D3FBD16E2C1D806500B4B8EF /* 8.png in Resources */,
 				D3FBD16C2C1D806500B4B8EF /* 2.png in Resources */,
 				D3FBD1762C1D807500B4B8EF /* flag.png in Resources */,
