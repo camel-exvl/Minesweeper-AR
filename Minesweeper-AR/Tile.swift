@@ -71,12 +71,14 @@ class Tile: Entity, HasModel, HasCollision {
         self.addChild(topFaceEntity)
     }
     
-    func reveal() -> Int {
+    func reveal() -> (Int, Bool) {
         tile.isRevealed = true
         render()
-        var cnt = 1
+        var cnt = (tile.isMine ? 0 : 1, tile.isMine)
         if tile.minesAround == 0 && !tile.isMine {
-            cnt += (self.parent as! Grid).revealNeighbors(of: self)
+            let res = (self.parent as! Grid).revealNeighbors(of: self)
+            cnt.0 += res.0
+            cnt.1 = cnt.1 || res.1
         }
         return cnt;
     }

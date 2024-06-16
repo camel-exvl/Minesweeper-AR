@@ -49,7 +49,29 @@ class Grid: Entity, HasModel, HasAnchoring {
         }
     }
     
-    func revealNeighbors(of tile: Tile) -> Int {
+    func revealNeighbors(of tile: Tile) -> (Int, Bool) {
+        let x = tile.pos.x
+        let y = tile.pos.y
+        var cnt = (0, false)
+        for i in -1...1 {
+            for j in -1...1 {
+                let newX = x + i
+                let newY = y + j
+                if newX < 0 || newX >= data.count || newY < 0 || newY >= data[0].count {
+                    continue
+                }
+                let neighbor = getTile(x: newX, y: newY)
+                if !neighbor.tile.isRevealed && !neighbor.tile.isFlagged {
+                    let res = neighbor.reveal()
+                    cnt.0 += res.0
+                    cnt.1 = cnt.1 || res.1
+                }
+            }
+        }
+        return cnt;
+    }
+    
+    func safeNeighbors(of tile: Tile) -> (Int, Bool) {
         let x = tile.pos.x
         let y = tile.pos.y
         var cnt = 0
@@ -60,13 +82,30 @@ class Grid: Entity, HasModel, HasAnchoring {
                 if newX < 0 || newX >= data.count || newY < 0 || newY >= data[0].count {
                     continue
                 }
-                let neighbor = getTile(x: newX, y: newY)
-                if !neighbor.tile.isRevealed && !neighbor.tile.isFlagged {
-                    cnt += neighbor.reveal()
-                }
+                cnt += getTile(x: newX, y: newY).tile.isFlagged ? 1 : 0
             }
         }
-        return cnt;
+        if cnt == tile.tile.minesAround {
+            var ret = (0, false)
+            // reveal all neighbors
+            for i in -1...1 {
+                for j in -1...1 {
+                    let newX = x + i
+                    let newY = y + j
+                    if newX < 0 || newX >= data.count || newY < 0 || newY >= data[0].count {
+                        continue
+                    }
+                    let neighbor = getTile(x: newX, y: newY)
+                    if !neighbor.tile.isRevealed && !neighbor.tile.isFlagged {
+                        let res = neighbor.reveal()
+                        ret.0 += res.0
+                        ret.1 = ret.1 || res.1
+                    }
+                }
+            }
+            return ret
+        }
+        return (0, false)
     }
     
     func generateAnotherMine(pos: SIMD2<Int>) {

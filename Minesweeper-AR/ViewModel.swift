@@ -62,7 +62,7 @@ class ViewModel: ObservableObject {
             return
         }
         
-        if tile.tile.isRevealed || tile.tile.isFlagged {
+        if tile.tile.isFlagged {
             return
         }
         if gameStatus == .ready {
@@ -79,11 +79,9 @@ class ViewModel: ObservableObject {
                 }
             }
         }
-        revealedTiles += tile.reveal()
-        if tile.tile.isMine {
-            revealedTiles -= 1
-        }
-        if revealedTiles == allTileNum || tile.tile.isMine {
+        let res = tile.tile.isRevealed ? (tile.parent as! Grid).safeNeighbors(of: tile) : tile.reveal()
+        revealedTiles += res.0
+        if revealedTiles == allTileNum || res.1 {
             self.finishGame()
         }
     }
