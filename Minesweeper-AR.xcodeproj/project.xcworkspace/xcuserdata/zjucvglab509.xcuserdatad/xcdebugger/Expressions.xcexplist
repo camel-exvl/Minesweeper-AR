@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Grid.generateAnotherMine(pos:):Grid.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "getTile(x: newX, y: newY).tile.minesAround">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

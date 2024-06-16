@@ -10,6 +10,7 @@ import ARKit
 import Combine
 
 enum GameStatus {
+    case ready
     case playing
     case win
     case lose
@@ -31,7 +32,7 @@ struct TileData {
 class MinesweeperARView: ARView, ARSessionDelegate {
     let coachingOverlay = ARCoachingOverlayView()
     let gameSetting = GameSetting()
-    var gameStatus: GameStatus = .playing
+    var gameStatus: GameStatus = .ready
     var revealedTiles: Int = 0
     var allTileNum: Int = 0
     var tiles: [[TileData]] = []
@@ -41,18 +42,26 @@ class MinesweeperARView: ARView, ARSessionDelegate {
     func initGame() {
         allTileNum = gameSetting.rows * gameSetting.columns - gameSetting.mines
         tiles = Array(repeating: Array(repeating: TileData(), count: gameSetting.columns), count: gameSetting.rows)
-        for _ in 0..<gameSetting.mines {
-            var row = Int.random(in: 0..<gameSetting.rows)
-            var column = Int.random(in: 0..<gameSetting.columns)
-            while tiles[row][column].isMine {
-                row = Int.random(in: 0..<gameSetting.rows)
-                column = Int.random(in: 0..<gameSetting.columns)
-            }
+        
+        // generate mines
+        var positions = Array(0..<gameSetting.rows * gameSetting.columns)
+        for i in 0..<gameSetting.mines {
+            let j = Int.random(in: i..<positions.count)
+            positions.swapAt(i, j)
+        }
+        
+        for i in 0..<gameSetting.mines {
+            let (row, column) = (positions[i] / gameSetting.columns, positions[i] % gameSetting.columns)
             tiles[row][column].isMine = true
-            for i in -1...1 {
-                for j in -1...1 {
-                    if row + i >= 0 && row + i < gameSetting.rows && column + j >= 0 && column + j < gameSetting.columns {
-                        tiles[row + i][column + j].minesAround += 1
+            for x in -1...1 {
+                for y in -1...1 {
+                    if x == 0 && y == 0 {
+                        continue
+                    }
+                    let newRow = row + x
+                    let newColumn = column + y
+                    if newRow >= 0 && newRow < gameSetting.rows && newColumn >= 0 && newColumn < gameSetting.columns {
+                        tiles[newRow][newColumn].minesAround += 1
                     }
                 }
             }
