@@ -10,22 +10,57 @@ import RealityKit
 import ARKit
 
 struct ContentView : View {
-    let viewModel = ViewModel()
+    @ObservedObject var viewModel: ViewModel
+    let arView: MinesweeperARView
+    
+    init() {
+        let viewModel = ViewModel()
+        self.viewModel = viewModel
+        self.arView = MinesweeperARView(viewModel: viewModel, frame: .zero)
+    }
     
     var body: some View {
-        ARViewContainer(viewModel: viewModel).edgesIgnoringSafeArea(.all)
+        ZStack {
+            ARViewContainer(viewModel: viewModel, arView: arView).edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                HStack {
+                    // title bar(remaing mines, restart button, time)
+                    Text("💣 \(viewModel.remainingMines)")
+                        .font(.title)
+                        .padding()
+                    Button(action: {
+                        arView.initGame()
+                    }) {
+                        HStack {
+                            Image(systemName: "arrow.clockwise")
+                            Text("重新开始")
+                        }
+                        .font(.system(.title3))
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                    }
+                    Text("⏱ \(viewModel.time)")
+                        .font(.title)
+                    .padding()}
+                Spacer()
+            }
+        }
     }
 }
 
 struct ARViewContainer: UIViewRepresentable {
     let viewModel: ViewModel
+    let arView: MinesweeperARView
     
-    init(viewModel: ViewModel) {
+    init(viewModel: ViewModel, arView: MinesweeperARView) {
         self.viewModel = viewModel
+        self.arView = arView
     }
     
     func makeUIView(context: Context) -> ARView {
-        let arView = MinesweeperARView(viewModel: viewModel, frame: .zero)
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = .horizontal
         arView.session.run(config, options: [])

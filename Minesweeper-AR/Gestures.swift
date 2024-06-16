@@ -35,6 +35,11 @@ extension MinesweeperARView {
         if tile.tile.isRevealed {
             return
         }
+        if tile.tile.isFlagged {
+            viewModel.remainingMines += 1
+        } else {
+            viewModel.remainingMines -= 1
+        }
         tile.longPress()
     }
 }

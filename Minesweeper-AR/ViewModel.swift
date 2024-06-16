@@ -5,14 +5,22 @@
 //  Created by zjucvglab509 on 2024/6/16.
 //
 
-class ViewModel {
+import Foundation
+import SwiftUI
+
+class ViewModel: ObservableObject {
     let gameSetting = GameSetting()
     var gameStatus: GameStatus = .ready
     var revealedTiles: Int = 0
     var allTileNum: Int = 0
     var tiles: [[TileData]] = []
+    @Published var time = 0
+    @Published var remainingMines = 0
     
     func initGame() {
+        time = 0
+        remainingMines = gameSetting.mines
+        revealedTiles = 0
         allTileNum = gameSetting.rows * gameSetting.columns - gameSetting.mines
         tiles = Array(repeating: Array(repeating: TileData(), count: gameSetting.columns), count: gameSetting.rows)
         
@@ -39,10 +47,14 @@ class ViewModel {
                 }
             }
         }
+        gameStatus = .ready
     }
     
     func finishGame() {
         gameStatus = revealedTiles == allTileNum ? .win : .lose
+        if gameStatus == .win {
+            remainingMines = 0
+        }
     }
     
     func handleTap(tile: Tile) {
@@ -58,6 +70,13 @@ class ViewModel {
             // ensure the first tap is not a mine
             if tile.tile.isMine {
                 (tile.parent as! Grid).generateAnotherMine(pos: tile.pos)
+            }
+            // start timer
+            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                self.time += 1
+                if self.gameStatus != .playing {
+                    timer.invalidate()
+                }
             }
         }
         revealedTiles += tile.reveal()

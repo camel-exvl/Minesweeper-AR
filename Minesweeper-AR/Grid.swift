@@ -38,6 +38,7 @@ class Grid: Entity, HasModel, HasAnchoring {
         self.viewModel = viewModel
         self.data = viewModel.tiles
         super.init()
+        self.children.removeAll()
         for i in 0..<data.count {
             for j in 0..<data[i].count {
                 let tile = Tile(pos: SIMD2(i, j), tile: data[i][j], finished: false)
