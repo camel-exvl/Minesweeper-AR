@@ -26,51 +26,64 @@ struct ContentView : View {
             ARViewContainer(viewModel: viewModel, arView: arView).edgesIgnoringSafeArea(.all)
             
             VStack {
-                HStack {
-                    // title bar(remaing mines, restart button, time)
-                    Text("💣 \(viewModel.remainingMines)")
-                        .font(.title)
-                        .padding()
-                    Button(action: {
-                        arView.initGame()
-                    }) {
+                ZStack {
+                    HStack {
+                        // title bar(remaing mines, restart button, time)
+                        Text("💣 \(viewModel.remainingMines)")
+                            .font(.title)
+                            .padding()
+                        Button(action: {
+                            arView.initGame()
+                        }) {
+                            HStack {
+                                Image(viewModel.smileImage)
+                                    .resizable()
+                                .frame(width: 30, height: 30)}
+                            .padding()
+                            .background(Color.gray)
+                        }
                         HStack {
-                            Image(viewModel.smileImage)
+                            Image(systemName: "clock")
                                 .resizable()
-                            .frame(width: 30, height: 30)}
-                        .padding()
-                        .background(Color.gray)
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.blue)
+                            Text("\(viewModel.time)")
+                                .font(.title)
+                        }.padding()
+                        Picker(
+                            selection: $difficultySelection,
+                            label: Text("Difficulty")) {
+                                Text("Easy").tag(0)
+                                Text("Medium").tag(1)
+                                Text("Hard").tag(2)
+                            }.onChange(of: difficultySelection) { oldValue, newValue in
+                                switch newValue {
+                                case 0:
+                                    viewModel.gameSetting = GameSetting(rows: 9, columns: 9, mines: 10)
+                                case 1:
+                                    viewModel.gameSetting = GameSetting(rows: 16, columns: 16, mines: 40)
+                                case 2:
+                                    viewModel.gameSetting = GameSetting(rows: 16, columns: 30, mines: 99)
+                                default:
+                                    break
+                                }
+                                arView.initGame()
+                            }
                     }
                     HStack {
-                        Image(systemName: "clock")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.blue)
-                        Text("\(viewModel.time)")
-                            .font(.title)
-                    }.padding()
-                    Picker(
-                        selection: $difficultySelection,
-                        label: Text("Difficulty")) {
-                            Text("Easy").tag(0)
-                            Text("Medium").tag(1)
-                            Text("Hard").tag(2)
-                        }.onChange(of: difficultySelection) { oldValue, newValue in
-                            switch newValue {
-                            case 0:
-                                viewModel.gameSetting = GameSetting(rows: 9, columns: 9, mines: 10)
-                            case 1:
-                                viewModel.gameSetting = GameSetting(rows: 16, columns: 16, mines: 40)
-                            case 2:
-                                viewModel.gameSetting = GameSetting(rows: 16, columns: 30, mines: 99)
-                            default:
-                                break
-                            }
-                            arView.initGame()
+                        Spacer()
+                        Button(action: {
+                            viewModel.showHelp = true
+                        }) {
+                            Text("Help")
+                                .padding()
                         }
+                    }
                 }
                 Spacer()
             }
+        }.sheet(isPresented: $viewModel.showHelp) {
+            HelpView(viewModel: viewModel)
         }
     }
 }
@@ -97,6 +110,62 @@ struct ARViewContainer: UIViewRepresentable {
     
     func updateUIView(_ uiView: ARView, context: Context) {}
     
+}
+
+struct HelpView: View {
+    @ObservedObject var viewModel: ViewModel
+    
+    var body: some View {
+        VStack {
+            Text("Minesweeper AR")
+                .font(.title)
+                .padding()
+            
+            HStack {
+                Text("First, Find a flat surface to place the game and start.")
+                    .font(.title3)
+                    .padding()
+                Spacer()
+            }
+            
+            HStack {
+                Text("Tap square to reveal it. If a number appears, it tells you how many mines are in the eight squares that surround the numbered square.")
+                    .font(.title3)
+                    .padding()
+                Spacer()
+            }
+            
+            HStack {
+                Text("If you think a square might have a mine, tap and hold it for a second to place a flag. Tap and hold again to remove the flag.")
+                    .font(.title3)
+                    .padding()
+                Spacer()
+            }
+            
+            HStack {
+                Text("You can tap a numbered square with the correct number of flags around it to reveal the remaining squares.")
+                    .font(.title3)
+                    .padding()
+                Spacer()
+            }
+            
+            HStack {
+                Text("If you reveal a mine, the game is over. If you reveal all the squares that don't have mines, you win.")
+                    .font(.title3)
+                    .padding()
+                Spacer()
+            }
+            
+            HStack {
+                Text("You can tap the smiley face to restart the game.")
+                    .font(.title3)
+                    .padding()
+                Spacer()
+            }
+            
+            Spacer()
+        }
+    }
 }
 
 #Preview {

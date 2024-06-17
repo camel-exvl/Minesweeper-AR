@@ -17,6 +17,8 @@
 		D313FE3E2C16F0160045C5F4 /* Minesweeper_ARUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313FE3D2C16F0160045C5F4 /* Minesweeper_ARUITests.swift */; };
 		D313FE402C16F0160045C5F4 /* Minesweeper_ARUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313FE3F2C16F0160045C5F4 /* Minesweeper_ARUITestsLaunchTests.swift */; };
 		D313FE7F2C17F61E0045C5F4 /* MinesweeperARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D313FE7E2C17F61E0045C5F4 /* MinesweeperARView.swift */; };
+		D39DD7E22C1FC82A005A7994 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D39DD7E12C1FC82A005A7994 /* Localizable.xcstrings */; };
+		D39DD7E42C1FCE24005A7994 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D39DD7E32C1FCE24005A7994 /* InfoPlist.xcstrings */; };
 		D3B354F82C1C072100EEF722 /* Coaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B354F72C1C072100EEF722 /* Coaching.swift */; };
 		D3B354FA2C1C0F3D00EEF722 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B354F92C1C0F3D00EEF722 /* Grid.swift */; };
 		D3B354FC2C1C15A200EEF722 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B354FB2C1C15A200EEF722 /* Tile.swift */; };
@@ -66,6 +68,8 @@
 		D313FE3D2C16F0160045C5F4 /* Minesweeper_ARUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_ARUITests.swift; sourceTree = "<group>"; };
 		D313FE3F2C16F0160045C5F4 /* Minesweeper_ARUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minesweeper_ARUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D313FE7E2C17F61E0045C5F4 /* MinesweeperARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperARView.swift; sourceTree = "<group>"; };
+		D39DD7E12C1FC82A005A7994 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		D39DD7E32C1FCE24005A7994 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		D3B354F72C1C072100EEF722 /* Coaching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coaching.swift; sourceTree = "<group>"; };
 		D3B354F92C1C0F3D00EEF722 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		D3B354FB2C1C15A200EEF722 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 		D313FE212C16F0140045C5F4 /* Minesweeper-AR */ = {
 			isa = PBXGroup;
 			children = (
+				D39DD7E12C1FC82A005A7994 /* Localizable.xcstrings */,
 				D3FBD1672C1D804E00B4B8EF /* Image */,
 				D313FE222C16F0140045C5F4 /* AppDelegate.swift */,
 				D313FE242C16F0140045C5F4 /* ContentView.swift */,
@@ -144,6 +149,7 @@
 				D3BEA1E52C1C388E007C518D /* Gestures.swift */,
 				D31233902C1EEF4F00DC9081 /* ViewModel.swift */,
 				D3D4F8892C1EEFFF003BA5B5 /* Model.swift */,
+				D39DD7E32C1FCE24005A7994 /* InfoPlist.xcstrings */,
 			);
 			path = "Minesweeper-AR";
 			sourceTree = "<group>";
@@ -278,6 +284,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = D313FE162C16F0140045C5F4;
 			productRefGroup = D313FE202C16F0140045C5F4 /* Products */;
@@ -307,8 +314,10 @@
 				D3FBD1762C1D807500B4B8EF /* flag.png in Resources */,
 				D3FBD1792C1D807500B4B8EF /* mine.png in Resources */,
 				D313FE2A2C16F0150045C5F4 /* Preview Assets.xcassets in Resources */,
+				D39DD7E22C1FC82A005A7994 /* Localizable.xcstrings in Resources */,
 				D3FBD17D2C1D807B00B4B8EF /* mine_red.png in Resources */,
 				D313FE272C16F0150045C5F4 /* Assets.xcassets in Resources */,
+				D39DD7E42C1FCE24005A7994 /* InfoPlist.xcstrings in Resources */,
 				D3FBD16D2C1D806500B4B8EF /* 3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

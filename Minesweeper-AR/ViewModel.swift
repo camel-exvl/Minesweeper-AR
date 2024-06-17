@@ -17,6 +17,7 @@ class ViewModel: ObservableObject {
     @Published var time = 0
     @Published var remainingMines = 0
     @Published var smileImage = "smile"
+    @Published var showHelp = false
     
     func initGame() {
         smileImage = "smile"
