@@ -158,7 +158,9 @@ class Grid: Entity, HasModel, HasAnchoring {
     func finish(win: Bool) {
         for child in self.children {
             let tile = child as! Tile
-            tile.finish(win: win)
+            if tile.tile.isMine || tile.tile.isFlagged {
+                tile.finish(win: win)
+            }
         }
     }
     

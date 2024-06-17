@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class ViewModel: ObservableObject {
-    let gameSetting = GameSetting()
+    var gameSetting = GameSetting()
     var gameStatus: GameStatus = .ready
     var revealedTiles: Int = 0
     var allTileNum: Int = 0
