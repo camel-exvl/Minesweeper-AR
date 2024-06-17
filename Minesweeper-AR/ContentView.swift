@@ -50,13 +50,15 @@ struct ContentView : View {
                             Text("\(viewModel.time)")
                                 .font(.title)
                         }.padding()
+                    }
+                    HStack {
                         Picker(
                             selection: $difficultySelection,
                             label: Text("Difficulty")) {
                                 Text("Easy").tag(0)
                                 Text("Medium").tag(1)
                                 Text("Hard").tag(2)
-                            }.onChange(of: difficultySelection) { oldValue, newValue in
+                            }.onChange(of: difficultySelection) { newValue in
                                 switch newValue {
                                 case 0:
                                     viewModel.gameSetting = GameSetting(rows: 9, columns: 9, mines: 10)
@@ -68,9 +70,7 @@ struct ContentView : View {
                                     break
                                 }
                                 arView.initGame()
-                            }
-                    }
-                    HStack {
+                            }.padding()
                         Spacer()
                         Button(action: {
                             viewModel.showHelp = true
