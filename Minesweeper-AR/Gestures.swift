@@ -16,6 +16,17 @@ extension MinesweeperARView {
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        if viewModel.gameStatus != .ready && viewModel.gameStatus != .playing {
+            return
+        }
+        if sender?.state == .ended {
+            viewModel.smileImage = "smile_click"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if self.viewModel.gameStatus == .ready || self.viewModel.gameStatus == .playing {
+                    self.viewModel.smileImage = "smile"
+                }
+            }
+        }
         guard let touchInView = sender?.location(in: self) else { return }
         guard let tile = self.entity(at: touchInView) as? Tile else { return }
         
@@ -26,6 +37,14 @@ extension MinesweeperARView {
     }
     
     @objc func handleLongPress(_ sender: UILongPressGestureRecognizer? = nil) {
+        if viewModel.gameStatus != .ready && viewModel.gameStatus != .playing {
+            return
+        }
+        if sender?.state == .began {
+            viewModel.smileImage = "smile_click"
+        } else if sender?.state == .ended {
+            viewModel.smileImage = "smile"
+        }
         if sender?.state != .began || viewModel.gameStatus != .playing {
             return
         }

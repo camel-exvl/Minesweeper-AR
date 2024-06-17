@@ -33,14 +33,11 @@ struct ContentView : View {
                         arView.initGame()
                     }) {
                         HStack {
-                            Image(systemName: "arrow.clockwise")
-                            Text("重新开始")
-                        }
-                        .font(.system(.title3))
+                            Image(viewModel.smileImage)
+                                .resizable()
+                            .frame(width: 30, height: 30)}
                         .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
+                        .background(Color.gray)
                     }
                     Text("⏱ \(viewModel.time)")
                         .font(.title)

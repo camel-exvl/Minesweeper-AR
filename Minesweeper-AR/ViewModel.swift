@@ -16,8 +16,10 @@ class ViewModel: ObservableObject {
     var tiles: [[TileData]] = []
     @Published var time = 0
     @Published var remainingMines = 0
+    @Published var smileImage = "smile"
     
     func initGame() {
+        smileImage = "smile"
         time = 0
         remainingMines = gameSetting.mines
         revealedTiles = 0
@@ -52,6 +54,7 @@ class ViewModel: ObservableObject {
     
     func finishGame() {
         gameStatus = revealedTiles == allTileNum ? .win : .lose
+        smileImage = gameStatus == .win ? "smile_win" : "smile_lose"
         if gameStatus == .win {
             remainingMines = 0
         }
