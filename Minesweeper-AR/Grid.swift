@@ -31,6 +31,7 @@ class Grid: Entity, HasModel, HasAnchoring {
     }
     
     private func getTile(x: Int, y: Int) -> Tile {
+        assert(x >= 0 && x < data.count && y >= 0 && y < data[0].count)
         return self.children[(x * data[0].count) + y] as! Tile
     }
     
@@ -55,6 +56,9 @@ class Grid: Entity, HasModel, HasAnchoring {
         var cnt = (0, false)
         for i in -1...1 {
             for j in -1...1 {
+                if i == 0 && j == 0 {
+                    continue
+                }
                 let newX = x + i
                 let newY = y + j
                 if newX < 0 || newX >= data.count || newY < 0 || newY >= data[0].count {
@@ -77,6 +81,9 @@ class Grid: Entity, HasModel, HasAnchoring {
         var cnt = 0
         for i in -1...1 {
             for j in -1...1 {
+                if i == 0 && j == 0 {
+                    continue
+                }
                 let newX = x + i
                 let newY = y + j
                 if newX < 0 || newX >= data.count || newY < 0 || newY >= data[0].count {
@@ -90,6 +97,9 @@ class Grid: Entity, HasModel, HasAnchoring {
             // reveal all neighbors
             for i in -1...1 {
                 for j in -1...1 {
+                    if i == 0 && j == 0 {
+                        continue
+                    }
                     let newX = x + i
                     let newY = y + j
                     if newX < 0 || newX >= data.count || newY < 0 || newY >= data[0].count {

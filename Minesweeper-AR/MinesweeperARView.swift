@@ -29,12 +29,13 @@ class MinesweeperARView: ARView, ARSessionDelegate {
     }
     
     func initGame() {
+        self.scene.anchors.removeAll()
         viewModel.initGame()
         showGrid()
+        viewModel.gameStatus = .ready
     }
     
     func showGrid() {
-        self.scene.anchors.removeAll()
         let grid = Grid(viewModel: viewModel)
         grid.minimumBounds = [0.5, 0.5]
         

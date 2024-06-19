@@ -20,6 +20,7 @@ class ViewModel: ObservableObject {
     @Published var showHelp = false
     
     func initGame() {
+        gameStatus = .prepare
         smileImage = "smile"
         time = 0
         remainingMines = gameSetting.mines
@@ -50,7 +51,6 @@ class ViewModel: ObservableObject {
                 }
             }
         }
-        gameStatus = .ready
     }
     
     func finishGame() {

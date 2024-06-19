@@ -6,6 +6,7 @@
 //
 
 enum GameStatus {
+    case prepare
     case ready
     case playing
     case win
