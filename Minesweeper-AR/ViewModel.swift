@@ -14,6 +14,7 @@ class ViewModel: ObservableObject {
     var revealedTiles: Int = 0
     var allTileNum: Int = 0
     var tiles: [[TileData]] = []
+    private var timer: Timer?
     @Published var time = 0
     @Published var remainingMines = 0
     @Published var smileImage = "smile"
@@ -22,6 +23,7 @@ class ViewModel: ObservableObject {
     func initGame() {
         gameStatus = .prepare
         smileImage = "smile"
+        timer?.invalidate()
         time = 0
         remainingMines = gameSetting.mines
         revealedTiles = 0
@@ -76,11 +78,8 @@ class ViewModel: ObservableObject {
                 (tile.parent as! Grid).generateAnotherMine(pos: tile.pos)
             }
             // start timer
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
                 self.time += 1
-                if self.gameStatus != .playing {
-                    timer.invalidate()
-                }
             }
         }
         let res = tile.tile.isRevealed ? (tile.parent as! Grid).safeNeighbors(of: tile) : tile.reveal()
