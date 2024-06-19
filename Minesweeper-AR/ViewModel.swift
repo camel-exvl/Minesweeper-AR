@@ -61,6 +61,7 @@ class ViewModel: ObservableObject {
         if gameStatus == .win {
             remainingMines = 0
         }
+        timer?.invalidate()
     }
     
     func handleTap(tile: Tile) {

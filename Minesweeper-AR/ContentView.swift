@@ -58,14 +58,14 @@ struct ContentView : View {
                                 Text("Easy").tag(0)
                                 Text("Medium").tag(1)
                                 Text("Hard").tag(2)
-                            }.onChange(of: difficultySelection) { oldValue, newValue in
+                            }.onChange(of: difficultySelection) { newValue in
                                 switch newValue {
                                 case 0:
                                     viewModel.gameSetting = GameSetting(rows: 9, columns: 9, mines: 10)
                                 case 1:
-                                    viewModel.gameSetting = GameSetting(rows: 16, columns: 16, mines: 40)
+                                    viewModel.gameSetting = GameSetting(rows: 12, columns: 12, mines: 25)
                                 case 2:
-                                    viewModel.gameSetting = GameSetting(rows: 16, columns: 30, mines: 99)
+                                    viewModel.gameSetting = GameSetting(rows: 16, columns: 16, mines: 40)
                                 default:
                                     break
                                 }
